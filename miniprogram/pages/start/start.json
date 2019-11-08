@@ -1,0 +1,11 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "发起助力",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "mp-cell": "../../weui-miniprogram/cell/cell",
+    "mp-cells": "../../weui-miniprogram/cells/cells"
+  }
+}

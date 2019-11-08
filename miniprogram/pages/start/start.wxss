@@ -1,0 +1,9 @@
+/* miniprogram/pages/start/start.wxss */
+.logo {
+  width: 100%
+}
+.weui-input {
+  width: 300rpx;
+  float: right;
+  text-align: right;
+}

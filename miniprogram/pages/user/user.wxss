@@ -1,0 +1,97 @@
+/* miniprogram/pages/user/user.wxss */
+page{
+  background: #eee;
+}
+.section-header {
+  display: flex;
+  margin-top: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+  background: #fff;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+}
+
+.section-header-column {
+  display: flex;
+  flex-direction: column;
+  width: 88%;
+  margin-left: 40rpx;
+  align-self: center;
+}
+
+.user-logo {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50rpx;
+}
+
+.nick {
+  display: flex;
+  align-content: center;
+  margin-right: 20rpx;
+}
+
+.nick-title {
+  color: grey;
+  white-space: nowrap;
+}
+
+.nick-content {
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.section-main{
+  display: flex;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid #ccc;
+  box-sizing: border-box;
+  background: #fff;
+}
+.main-middle{
+  display: flex;
+  width: 100%;
+}
+.user-box{
+  flex-direction: column;
+  display: flex;
+  align-content: space-between;
+  width: 50%;
+  text-align: center;
+
+}
+.user-box:nth-child(1){
+  border-right: 1rpx solid #ccc;
+}
+.user-strong{
+  font-size: 50rpx;
+  font-weight: bold;
+  margin-bottom: 2rpx;
+}
+.user-title{
+  color: #ABB2BF;
+}
+.section-footer{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%)
+}
+.section-centent{
+  padding: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #fff;
+}
+.centent-right{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  right: 0;
+  margin-right: 10rpx;
+}

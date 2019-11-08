@@ -1,0 +1,4 @@
+<!--miniprogram/pages/index/index.wxml-->
+<view class="btn-area">
+  <navigator url="../start/start" hover-class="navigator-hover" open-type="navigate">跳转到新页面</navigator>
+</view>

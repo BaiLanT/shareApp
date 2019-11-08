@@ -1,0 +1,31 @@
+<view class='section-header'>
+  <view class='section-logo'>
+    <image class='user-logo' src="{{avatarUrl}}"> </image>
+  </view>
+  <view class='section-header-column'>
+    <view class='nick'>
+      <text class='nick-title'>昵称：</text>
+      <text class='nick-content'>{{nickName}}</text>
+      <button class='getname' open-type="getUserInfo" size='mini' wx:if="{{nickName === ''}}" lang="zh_CN" bindgetuserinfo="onGotUserInfo">获取昵称</button>
+    </view>
+  </view>
+</view>
+<view class='section-main'>
+  <view class="main-middle">
+    <view class="user-box">
+      <text class="user-strong">1</text>
+      <text class="user-title">我发起的</text>
+    </view>
+    <view class="user-box">
+      <text class="user-strong">1</text>
+      <text class="user-title">我参与的</text>
+    </view>
+  </view>
+</view>
+<view class="section-centent" bindtap="navigator" wx:if="{{isAdmin}}">
+  <text>发起助力</text>
+  <image class="centent-right" src="../../images/icon-arrow-right.png"></image>
+</view>
+<view class='section-footer'>
+  <text> - 白白白 - </text>
+</view>

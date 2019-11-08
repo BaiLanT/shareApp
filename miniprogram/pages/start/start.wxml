@@ -1,0 +1,23 @@
+<!--miniprogram/pages/start/start.wxml-->
+<view>
+  <image class="logo" src="../../images/QJ8798804729.jpg"></image>
+</view>
+<mp-cells>
+  <mp-cell show-error prop="idcard" title="奖品名称">
+    <input bindinput="formInputChange" class="weui-input" placeholder="请输入奖品名称" />
+  </mp-cell>
+  <mp-cell show-error prop="idcard" title="奖品份数">
+    <input bindinput="formInputChange" class="weui-input" placeholder="份数" />
+  </mp-cell>
+  <mp-cell prop="date" title="开奖日期" ext-class="">
+    <picker mode="date" start="{{date}}" bindchange="bindDateChange">
+      <view class="weui-input">{{date}}</view>
+    </picker>
+  </mp-cell>
+   <mp-cell prop="date" title="开奖时间" ext-class="">
+    <picker mode="time" bindchange="bindTimeChange">
+      <view class="weui-input">{{time}}</view>
+    </picker>
+  </mp-cell>
+</mp-cells>
+<button class="btn" type="primary" bindtap="start">发起新助力</button>
