@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "mp-cell": "../../weui-miniprogram/cell/cell",
+    "mp-cells": "../../weui-miniprogram/cells/cells"
+  },
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "助力详情",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light"
+}

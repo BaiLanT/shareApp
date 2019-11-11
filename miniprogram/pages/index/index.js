@@ -5,14 +5,29 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
-
+  card: function (e) {
+    const info = JSON.stringify(e.target.dataset.item)
+    wx.navigateTo({
+      url: '../gift/gift?data=' + info,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const that = this
+    wx.cloud.callFunction({
+      name: 'gifts',
+      success: function (res) {
+        if (res.errMsg == 'cloud.callFunction:ok'){
+          that.setData({
+            list: res.result.data
+          })
+        }
+      }
+    })
   },
 
   /**
@@ -26,7 +41,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const that = this
+    wx.cloud.callFunction({
+      name: 'gifts',
+      success: function (res) {
+        if (res.errMsg == 'cloud.callFunction:ok') {
+          that.setData({
+            list: res.result.data
+          })
+        }
+      }
+    })
   },
 
   /**

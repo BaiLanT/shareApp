@@ -1,1 +1,10 @@
 /* miniprogram/pages/index/index.wxss */
+page{
+  background: #eee;
+}
+.card{
+  margin-top: 20rpx;
+}
+.cards{
+  margin-top: 20rpx;
+}

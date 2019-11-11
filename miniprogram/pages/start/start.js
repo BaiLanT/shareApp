@@ -7,7 +7,10 @@ Page({
   data: {
     date: "",
     time: "",
-  },
+    name: '',
+    num: 0,
+    remarks: ''
+    },
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value
@@ -33,10 +36,69 @@ Page({
     if (showSecond) return  hour + ':' + min
     return year + '-' + month + '-' + day // 按照此种格式显示日期
   },
+  formInputChange (e) {
+    this.setData({
+      name: e.detail.value
+    })
+  },
+  formNumChange(e) {
+    this.setData({
+      num: e.detail.value
+    })
+  },
+  formRemarksChange () {
+    this.setData({
+      remarks: e.detail.value
+    })
+  },
   // 发起助力
   start: function () {
-    const {date, time} = this.data
-    console.log(date, time)
+    const { date, time, name, num, remarks} = this.data
+    if (!name && !num){
+      wx.showToast({
+        title: '请正确填写内容',
+        icon: 'none'
+      })
+      return
+    }
+    const now = this.formatDate(Date.now(), true)
+    if (time == now){
+      wx.showToast({
+        title: '开奖时间需大于现在时间',
+        icon: 'none'
+      })
+      return
+    }
+    const uid = wx.getStorageSync('uid')
+    let info = {
+      date,
+      time,
+      name,
+      num,
+      uid,
+      remarks
+    }
+    wx.cloud.callFunction({
+      name: 'savegift',
+      data: {
+        info
+      },
+      success: function (res) {
+        if (res.errMsg == "cloud.callFunction:ok"){
+          wx.showToast({
+            title: '发起成功',
+            icon: 'success',
+            duration: 1000
+          }),
+          setTimeout(() => {
+            wx.hideToast()
+            wx.switchTab({
+              url: '../index/index'
+            })
+          },1000)
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

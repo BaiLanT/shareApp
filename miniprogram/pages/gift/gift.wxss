@@ -1,0 +1,22 @@
+/* miniprogram/pages/gift/gift.wxss */
+page{
+  background: #eee;
+}
+.logo {
+  width: 100%
+}
+.weui-input {
+  width: 300rpx;
+  float: right;
+  text-align: right;
+}
+.footer-imags {
+  width: 100%;
+}
+.avatarUrl {
+  width: 100rpx;
+  height: 100rpx;
+}
+.stat{
+  float: right;
+}

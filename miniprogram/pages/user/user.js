@@ -17,24 +17,7 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
-              wx.cloud.callFunction({
-                name: 'login',
-                data: {
-                  res
-                },
-                success: ({result}) => {
-                  if (result.appid == 'wx50ca6457364e6428'){
-                    that.setData({
-                      isAdmin: true
-                    })
-                  }
-                  that.setData({
-                    nickName: result.userInfo.nickName,
-                    avatarUrl: result.userInfo.avatarUrl,
-                    appid: result.appid
-                  })
-                }
-              })
+              that.saveuser(res)
             }
           })
         }
@@ -42,19 +25,52 @@ Page({
     })
   },
   onGotUserInfo(e) {
-    let { nickName, avatarUrl, gender } = e.detail.userInfo
-    this.setData({
+    let {
       nickName,
-      avatarUrl
-    })
+      avatarUrl,
+      gender
+    } = e.detail.userInfo
+    this.saveuser(e.detail)
     wx.setStorage({
       key: 'avatarUrl',
       data: avatarUrl
     })
+    wx.setStorage({
+      key: 'nickName',
+      data: nickName
+    })
   },
-  navigator: function () {
+  navigator: function() {
     wx.navigateTo({
       url: '../start/start',
+    })
+  },
+  // 保存用户信息
+  saveuser: function(res) {
+    const that = this
+    wx.cloud.callFunction({
+      name: 'saveuser',
+      data: {
+        res
+      },
+      success: function({
+        result
+      }) {
+        if (result.appId == "wx50ca6457364e6428") {
+          that.setData({
+            isAdmin: true
+          })
+        }
+        that.setData({
+          nickName: result.userInfo.nickName,
+          avatarUrl: result.userInfo.avatarUrl,
+          appid: result.appId
+        })
+        wx.setStorage({
+          key: 'uid',
+          data: result.appId
+        })
+      }
     })
   },
   /**

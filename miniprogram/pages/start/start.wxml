@@ -7,7 +7,7 @@
     <input bindinput="formInputChange" class="weui-input" placeholder="请输入奖品名称" />
   </mp-cell>
   <mp-cell show-error prop="idcard" title="奖品份数">
-    <input bindinput="formInputChange" class="weui-input" placeholder="份数" />
+    <input bindinput="formNumChange" class="weui-input" placeholder="份数" type="number" />
   </mp-cell>
   <mp-cell prop="date" title="开奖日期" ext-class="">
     <picker mode="date" start="{{date}}" bindchange="bindDateChange">
@@ -18,6 +18,9 @@
     <picker mode="time" bindchange="bindTimeChange">
       <view class="weui-input">{{time}}</view>
     </picker>
+  </mp-cell>
+  <mp-cell show-error prop="idcard" title="备注">
+    <input bindinput="formRemarksChange" class="weui-input" placeholder="备注信息" />
   </mp-cell>
 </mp-cells>
 <button class="btn" type="primary" bindtap="start">发起新助力</button>

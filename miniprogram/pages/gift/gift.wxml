@@ -1,0 +1,28 @@
+<!--miniprogram/pages/gift/gift.wxml-->
+<view>
+  <image class="logo" src="../../images/QJ8798804729.jpg"></image>
+</view>
+<view>
+  <mp-cells>
+  <mp-cell show-error title="奖品名称">
+    <input bindinput="formInputChange" class="weui-input" placeholder="{{list.name}}" disabled/>
+  </mp-cell>
+  <mp-cell show-error title="奖品份数">
+    <input bindinput="formNumChange" class="weui-input" placeholder="{{list.num}}" type="number" disabled/>
+  </mp-cell>
+  <mp-cell prop="date" title="开奖日期" ext-class="">
+      <view class="weui-input">{{list.date + '  '+ list.time}}</view>
+  </mp-cell>
+  <mp-cell show-error title="备注">
+    <input bindinput="formRemarksChange" class="weui-input" placeholder="{{list.remarks ? list.remarks: '无'}}" disabled/>
+  </mp-cell>
+</mp-cells>
+</view>
+<view class="footer">
+  <button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:if="{{isuser}}">参与助力</button>
+  <button type="primary" open-type="share"  wx:else>分享助力</button>
+  <view class="footer-imags" wx:if="{{list.list.length !== 0}}" wx:for="{{list.list}}">
+    <image src="{{item.avatrUrl}}" class="avatarUrl"></image>
+    <text class="stat">助力值: 10</text>
+  </view>
+</view>
