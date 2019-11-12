@@ -8,37 +8,79 @@ Page({
     list: {},
     nickName: '',
     avatarUrl: '',
-    isuser: true
+    isuser: true,
+    users: [],
+    stat: 10
   },
+  // 参与助力
   getuserinfo: function(e) {
-    const {_id} = this.data.list
-    this.setData({
-      nickName: e.detail.userInfo.nickName,
-      avatarUrl: e.detail.userInfo.avatarUrl,
-      isuser: false
-    })
+    const {
+      _id
+    } = this.data.list
+    const {
+      users,
+      usertitle,
+      isshare,
+      stat
+    } = this.data
+    // 获取当前用户UID
     wx.cloud.callFunction({
-      name: 'updatagifts',
+      name: 'getuid',
       data: {
+        event: e
+      }
+    }).then(result => {
+      // 判断当前用户用没有参与过
+      const iscan = users.filter(item => {
+        return item.uid == result.result.openid
+      })
+      // if (iscan.length > 0) {
+      //   wx.showToast({
+      //     title: '您已经参与过助力,无法再次参与',
+      //     icon: 'none'
+      //   })
+      //   setTimeout(() => {
+      //     wx.hideToast()
+      //   }, 1500)
+      //   return false
+      // }
+      let info = {
         nickName: e.detail.userInfo.nickName,
         avatarUrl: e.detail.userInfo.avatarUrl,
-        _id: _id
-      },
-      success: function(res) {
-        console.log(res)
+        uid: result.result.openid,
+        stat,
+        users: []
       }
+      users.unshift(info)
+      this.setData({
+        nickName: e.detail.userInfo.nickName,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        users,
+        isuser: false
+      })
+      // 保存用户信息到数据库
+      wx.cloud.callFunction({
+        name: 'updatagifts',
+        data: {
+          users,
+          _id: _id
+        },
+        success: function(res) {
+          wx.navigateTo({
+            url: `../share/share?uid=${result.result.openid}&_id=${_id}&nickName=${e.detail.userInfo.nickName}&avatarUrl=${e.detail.userInfo.avatarUrl}&stat=${stat}`,
+          })
+        }
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
     const list = JSON.parse(options.data)
     this.setData({
-      list
+      list,
+      users: list.list
     })
   },
 
@@ -52,27 +94,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function(e) {
-    console.log(e)
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
+  onShow: function() {
   },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+   
   }
 })

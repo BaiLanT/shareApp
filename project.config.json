@@ -30,13 +30,30 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "pages/share/share",
+					"pathName": "pages/share/share",
+					"query": "uid='otTRX4wIGUFlgRHekahAFKfRprdQ'&_id='00a6cea35dca5c14058f402b4f0f57df'&nickName='白皛白'&avatarUrl= \"https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKn7Hw8PpvSvIoPmVjFW73icZc0PtOHspQSNkLa2vWBNRxwIhcCriaia8ttFGf8icumu4054NI4sADzAQ/132\"&stat=10",
+					"scene": 1044,
+					"shareInfo": {
+						"groupName": "测试模拟群0",
+						"shareName": "9aoH3FOvdkkq5PJ9B2LJzYmtmVBQB-rR9T6VfZIeKao@cr4dev",
+						"shareKey": "yFkpI_Lj0qyLyObWMt4LyytBubxpkleabVzmR23XUHgbclcBqGYfVMO-_Jur8_nScm-CiY9kjFgt5mdN67iykg~~"
+					}
 				}
 			]
 		}

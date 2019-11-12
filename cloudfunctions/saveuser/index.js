@@ -10,7 +10,7 @@ exports.main = (event) => {
   db.collection('users').where({
     appId: APPID
   }).get().then(res => {
-    if (res.data[0].appId !== APPID) {
+    if (res.data[0].openId !== OPENID) {
       db.collection('users').add({
         data: {
           appId: APPID,

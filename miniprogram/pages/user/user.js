@@ -5,7 +5,7 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     nickName: '',
     avatarUrl: '',
-    appid: '',
+    openId: '',
     isAdmin: false
   },
   onLoad: function() {
@@ -21,6 +21,13 @@ Page({
             }
           })
         }
+      }
+    })
+    const {openId} = this.data
+    wx.cloud.callFunction({
+      name: 'getusergift',
+      success: function(res) {
+        console.log(res)
       }
     })
   },
@@ -64,11 +71,11 @@ Page({
         that.setData({
           nickName: result.userInfo.nickName,
           avatarUrl: result.userInfo.avatarUrl,
-          appid: result.appId
+          openId: result.openId
         })
         wx.setStorage({
           key: 'uid',
-          data: result.appId
+          data: result.openId
         })
       }
     })
