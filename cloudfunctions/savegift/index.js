@@ -13,7 +13,7 @@ exports.main = async(data) => {
       time: data.info.time,
       name: data.info.name,
       num: data.info.num,
-      uid: data.info.uid + data.info.date + data.info.time,
+      uid: data.info.uid,
       remarks: data.info.remarks,
       list: [{
         avatarUrl: '',

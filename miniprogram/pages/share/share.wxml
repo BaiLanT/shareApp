@@ -2,6 +2,9 @@
 <view>
   <image class="logo" src="../../images/QJ8798804729.jpg"></image>
 </view>
+<view class="footer-title">
+  <text>--------------参与者---------------</text>
+</view>
 <view class="user">
   <image src="{{avatarUrl}}" class="avatarUrl"></image>
   <text class="nickName">{{nickName}}</text>
@@ -10,10 +13,12 @@
 <button type="primary" open-type="share" wx:if= '{{isshare}}'>分享助力</button>
 <button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:else>给他助力</button>
 <view class="footer-title" wx:if="{{users.length !== 0}}">
-  <text>--------------参与者---------------</text>
+  <text>--------------助力者---------------</text>
 </view>
-<view class="footer-imags" wx:if="{{users.length !== 0}}" wx:for="{{users}}" wx:key="{{index}}">
+<view class="footer">
+  <view class="footer-imags" wx:if="{{users.length !== 0}}" wx:for="{{users}}" wx:key="{{index}}">
   <image src="{{item.avatarUrl}}" class="avatarUrl"></image>
   <text class="nickName">{{item.nickName}}</text>
-  <text class="stat">助力值: {{stat}}</text>
+  <text class="stat">助力值: {{item.stat}}</text>
+</view>
 </view>

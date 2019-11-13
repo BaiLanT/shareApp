@@ -28,6 +28,6 @@
   <view class="footer-imags" wx:if="{{users.length !== 0}}" wx:for="{{users}}" wx:key="{{index}}">
     <image src="{{item.avatarUrl}}" class="avatarUrl"></image>
     <text class="nickName">{{item.nickName}}</text>
-    <text class="stat">助力值: {{stat}}</text>
+    <text class="stat">助力值: {{item.stat}}</text>
   </view>
 </view>

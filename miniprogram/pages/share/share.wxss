@@ -8,11 +8,12 @@ page {
 
 
 .footer {
-  margin-bottom: 100rpx;
+  background: #fff;
 }
 
 .footer-imags {
   width: 100%;
+  margin-bottom: 20rpx;
 }
 
 .nickName {
@@ -30,6 +31,7 @@ page {
   float: right;
   margin-right: 20rpx;
   margin-top: 26rpx;
+  color: #92D5FF;
 }
 
 .footer-title {

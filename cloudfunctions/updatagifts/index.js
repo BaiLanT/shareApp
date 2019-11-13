@@ -13,10 +13,15 @@ exports.main = async (data)  => {
   if(!data.share){
     item.data.list = data.users
   }else{
-    console.log(data.users)
-    item.data.list.users = data.users
+    item.data.list.forEach(item => {
+      if(item.uid == data.uid){
+        item.users = data.users
+        item.stat = data.stat
+      }
+    })
   }
   delete item.data._id
+  console.log(item)
   const result = await db.collection('gifts').doc(data._id).set({
     data: item.data
   })

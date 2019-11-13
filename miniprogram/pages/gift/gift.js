@@ -10,7 +10,7 @@ Page({
     avatarUrl: '',
     isuser: true,
     users: [],
-    stat: 10
+    stat: 5,
   },
   // 参与助力
   getuserinfo: function(e) {
@@ -34,16 +34,16 @@ Page({
       const iscan = users.filter(item => {
         return item.uid == result.result.openid
       })
-      // if (iscan.length > 0) {
-      //   wx.showToast({
-      //     title: '您已经参与过助力,无法再次参与',
-      //     icon: 'none'
-      //   })
-      //   setTimeout(() => {
-      //     wx.hideToast()
-      //   }, 1500)
-      //   return false
-      // }
+      if (iscan.length > 0) {
+        wx.showToast({
+          title: '您已经参与过助力,无法再次参与',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          wx.hideToast()
+        }, 1500)
+        return false
+      }
       let info = {
         nickName: e.detail.userInfo.nickName,
         avatarUrl: e.detail.userInfo.avatarUrl,
@@ -55,8 +55,7 @@ Page({
       this.setData({
         nickName: e.detail.userInfo.nickName,
         avatarUrl: e.detail.userInfo.avatarUrl,
-        users,
-        isuser: false
+        users
       })
       // 保存用户信息到数据库
       wx.cloud.callFunction({
@@ -66,9 +65,16 @@ Page({
           _id: _id
         },
         success: function(res) {
-          wx.navigateTo({
-            url: `../share/share?uid=${result.result.openid}&_id=${_id}&nickName=${e.detail.userInfo.nickName}&avatarUrl=${e.detail.userInfo.avatarUrl}&stat=${stat}`,
+          wx.showToast({
+            title: '参与成功~',
+            mask: true
           })
+          setTimeout(() => {
+            wx.hideToast()
+            wx.navigateTo({
+              url: `../share/share?uid=${result.result.openid}&_id=${_id}&nickName=${e.detail.userInfo.nickName}&avatarUrl=${e.detail.userInfo.avatarUrl}&stat=${stat}`,
+            })
+          }, 1500)
         }
       })
     })

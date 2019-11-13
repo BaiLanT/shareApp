@@ -63,7 +63,7 @@ Page({
       success: function({
         result
       }) {
-        if (result.appId == "wx50ca6457364e6428") {
+        if (result.openId == "otTRX4wIGUFlgRHekahAFKfRprdQ") {
           that.setData({
             isAdmin: true
           })

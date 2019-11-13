@@ -11,10 +11,11 @@ Page({
     avatarUrl: '',
     stat: 0,
     uid: '',
-    _id: ''
+    _id: '',
+    othername: ''
   },
   getuserinfo: function (e) {
-    const { users, uid, stat, _id, nickName} = this.data
+    const { users, uid, stat, _id, nickName, othername} = this.data
     wx.cloud.callFunction({
       name: 'getuid',
       data: {
@@ -31,7 +32,12 @@ Page({
         }, 1500)
         return
       }
-      if (e.detail.userInfo.nickName == nickName){
+     
+      const otheruser = users.filter(item => {
+        return item.uid == result.result.openid
+      })
+      // 点击助力后无法再次点击
+      if (e.detail.userInfo.nickName == othername || otheruser.length > 0) {
         wx.showToast({
           title: '已经给他助力,无法再次操作',
           icon: 'none'
@@ -41,13 +47,16 @@ Page({
         }, 1500)
         return
       }
-      const stats = Math.floor((Math.random() * 10) + 1)
+      const stats = 5
+      // 增加助力人信息
       users.push({
         nickName: e.detail.userInfo.nickName,
-        avatrUrl: e.detail.userInfo.avatarUrl,
+        avatarUrl: e.detail.userInfo.avatarUrl,
+        uid: result.result.openid,
         stat: stats
       })
       this.setData({
+        othername: e.detail.userInfo.nickName,
         users,
         stat: Number(stat) + Number(stats)
       })
@@ -57,10 +66,12 @@ Page({
         data: {
           users,
           share: true,
+          stat,
+          uid,
           _id: _id || ''
         },
         success: function (res) {
-          // console.log(res)
+          console.log(res)
         }
       })
     })
@@ -143,8 +154,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    this.setData({
-      isshare: false
-    })
+   setTimeout(() => {
+     this.setData({
+       isshare: false
+     })
+   }, 1000)
   }
 })
