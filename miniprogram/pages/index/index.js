@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: []
+    list: [],
+    status: ""
+
   },
   card: function (e) {
     const info = JSON.stringify(e.target.dataset.item)
@@ -25,11 +27,41 @@ Page({
           that.setData({
             list: res.result.data
           })
+          that.gettime(res.result.data)
         }
       }
     })
   },
+  
+  gettime: function (day, time) {
+    let status
+    day.forEach(item => {
+      const nowtime = Date.now()
+      const daynum = Date.parse(item.date + ' ' + item.time)
+      let downtime = nowtime + (daynum - nowtime)
+      let stoptime = daynum - nowtime
+      if (daynum - nowtime > 0) {
+        status = '进行中～'
+      } else {
+        status = '已开奖'
+      }
+      item.countdown = {
+        downtime,
+        stoptime,
+        status
+      }
+    })
+    this.setData({
+      list: day,
+      status
+    })
+  },
 
+  myLinsterner(e) {
+    this.setData({
+      status: '结束'
+    });
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -49,6 +81,7 @@ Page({
           that.setData({
             list: res.result.data
           })
+          that.gettime(res.result.data)
         }
       }
     })
@@ -60,28 +93,6 @@ Page({
   onHide: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
   /**
    * 用户点击右上角分享
    */

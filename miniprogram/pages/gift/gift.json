@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "mp-cell": "../../weui-miniprogram/cell/cell",
-    "mp-cells": "../../weui-miniprogram/cells/cells"
+    "mp-cells": "../../weui-miniprogram/cells/cells",
+    "i-notice-bar": "../../weui-miniprogram/dist/notice-bar/index"
   },
   "navigationBarBackgroundColor": "#ffffff",
   "navigationBarTextStyle": "black",

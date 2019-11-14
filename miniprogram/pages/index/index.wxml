@@ -1,6 +1,12 @@
 <!--miniprogram/pages/index/index.wxml-->
 <view class="btn-area" class="cards" wx:for="{{list}}" wx:key="{{index}}">
-  <i-card title="{{item.name}}"  thumb="../../../images/QJ8798804729.jpg" i-class='card'  bindtap="card" data-item="{{item}}">
-    <view slot="content">助力结束时间: {{item.date + '   ' + item.time}}</view>
+  <i-card title="{{item.name}}" thumb="../../../images/QJ8798804729.jpg" i-class='card' bindtap="card" data-item="{{item}}">
+    <view slot="content">
+      <view class="view-wrap">
+        <view class="type-title">开奖倒计时：</view>
+        <i-count-down target="{{item.countdown.downtime}}" countdown-class="sb" show-day="true" format="{{['天', '时', '分', '秒']}}"></i-count-down>
+      </view>
+    </view>
+    <view slot="footer"><text>助力状态：{{item.countdown.status}}</text></view>
   </i-card>
 </view>

@@ -1,4 +1,4 @@
-<text class="countdown-class">
+<view class="countdown-class">
   {{time}}
-</text>
+</view>
 

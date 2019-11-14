@@ -5,6 +5,7 @@
   "backgroundColor": "#eeeeee",
   "backgroundTextStyle": "light",
   "usingComponents": {
-    "i-card": "../../weui-miniprogram/dist/card/index"
+    "i-card": "../../weui-miniprogram/dist/card/index",
+    "i-count-down": "../../weui-miniprogram/dist/count-down/index"
   }
 }

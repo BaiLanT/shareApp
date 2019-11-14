@@ -1,4 +1,7 @@
 <!--miniprogram/pages/gift/gift.wxml-->
+<i-notice-bar icon="systemprompt" loop>
+    1. 根据奖品数量, 1个奖品,就是助力值最高的那个人中奖,5个商品就是助力值高的5个人
+</i-notice-bar>
 <view>
   <image class="logo" src="../../images/QJ8798804729.jpg"></image>
 </view>
@@ -34,8 +37,4 @@
       <text class="stat">助力值: {{item.stat}}</text>
     </view>
   </scroll-view>
-</view>
-<view class="notice">
-  <text class="notice-title">公告: </text>
-  <view class="notice-main">1. 根据奖品数量, 1个奖品,就是助力值最高的那个人中奖,5个商品就是助力值高的5个人</view>
 </view>
