@@ -25,9 +25,17 @@
   <view class="footer-title">
     <text>--------------参与者---------------</text>
   </view>
-  <view class="footer-imags" wx:if="{{users.length !== 0}}" wx:for="{{users}}" wx:key="{{index}}">
-    <image src="{{item.avatarUrl}}" class="avatarUrl"></image>
-    <text class="nickName">{{item.nickName}}</text>
-    <text class="stat">助力值: {{item.stat}}</text>
-  </view>
+  <scroll-view class="scroll" scroll-y>
+    <view class="footer-imags" wx:if="{{users.length !== 0}}" wx:for="{{users}}" wx:key="{{index}}" bindtap="gotoinfo" data-uid="{{item.uid}}" data-nickName="{{item.nickName}}" data-avatarUrl="{{item.avatarUrl}}" data-stat="{{item.stat}}">
+      <view class="userinfo">
+        <image src="{{item.avatarUrl}}" class="avatarUrl"></image>
+        <text class="nickName">{{item.nickName}}</text>
+      </view>
+      <text class="stat">助力值: {{item.stat}}</text>
+    </view>
+  </scroll-view>
+</view>
+<view class="notice">
+  <text class="notice-title">公告: </text>
+  <view class="notice-main">1. 根据奖品数量, 1个奖品,就是助力值最高的那个人中奖,5个商品就是助力值高的5个人</view>
 </view>

@@ -15,11 +15,16 @@ page {
 }
 
 .footer {
-  margin-bottom: 100rpx;
+  margin-top: 20rpx;
+  background: #fff;
 }
 
 .footer-imags {
   width: 100%;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nickName {
@@ -41,4 +46,30 @@ page {
 .footer-title {
   margin: 20rpx 0;
   text-align: center;
+}
+.scroll {
+  max-height: 300rpx;
+}
+.userinfo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+.notice {
+  margin-top: 20rpx;
+  background: #fff;
+}
+.notice-title {
+  margin-left: 20rpx;
+  font-weight: bold;
+  font-size: 40rpx;
+  color: #4395FF;
+}
+.notice-main{
+   margin-left: 50rpx;
+   font-weight: bold;
+   margin-right: 20rpx;
 }

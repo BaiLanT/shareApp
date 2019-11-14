@@ -15,15 +15,7 @@ exports.main = async(data) => {
       num: data.info.num,
       uid: data.info.uid,
       remarks: data.info.remarks,
-      list: [{
-        avatarUrl: '',
-        nickName: '',
-        users: [{
-          avatarUrl: '',
-          nickName: '',
-          stat: 0
-        }]
-      }]
+      list: []
     }
   })
   return {

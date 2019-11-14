@@ -21,7 +21,6 @@ exports.main = async (data)  => {
     })
   }
   delete item.data._id
-  console.log(item)
   const result = await db.collection('gifts').doc(data._id).set({
     data: item.data
   })

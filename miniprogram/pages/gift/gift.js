@@ -79,6 +79,21 @@ Page({
       })
     })
   },
+  gotoinfo: function(e) {
+    console.log(e)
+    const {
+      list
+    } = this.data
+    const {
+      nickname,
+      avatarurl,
+      uid,
+      stat
+    } = e.currentTarget.dataset
+    wx.navigateTo({
+      url: `../share/share?uid=${uid}&_id=${list._id}&nickName=${nickname}&avatarUrl=${avatarurl}&stat=${stat}`,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -91,21 +106,28 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    const that = this
+    const { _id } = that.data.list
+    wx.cloud.callFunction({
+      name: 'gifts',
+      success: function (res) {
+        const gitfs = res.result.data.filter(item => {
+          return item._id == _id
+        })
+        that.setData({
+          list: gitfs[0],
+          users: gitfs[0].list
+        })
+      }
+    })
   },
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-   
+
   }
 })

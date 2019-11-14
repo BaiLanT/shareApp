@@ -1,6 +1,6 @@
 <!--miniprogram/pages/index/index.wxml-->
 <view class="btn-area" class="cards" wx:for="{{list}}" wx:key="{{index}}">
   <i-card title="{{item.name}}"  thumb="../../../images/QJ8798804729.jpg" i-class='card'  bindtap="card" data-item="{{item}}">
-    <view slot="content">助力结束时间: {{item.date + item.time}}</view>
+    <view slot="content">助力结束时间: {{item.date + '   ' + item.time}}</view>
   </i-card>
 </view>

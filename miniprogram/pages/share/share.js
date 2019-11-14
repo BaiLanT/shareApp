@@ -66,12 +66,18 @@ Page({
         data: {
           users,
           share: true,
-          stat,
+          stat: Number(stat) + Number(stats),
           uid,
           _id: _id || ''
         },
         success: function (res) {
-          console.log(res)
+          wx.showToast({
+            title: '助力成功',
+            mask: true
+          })
+          setTimeout(() => {
+            wx.hideToast()
+          }, 1500)
         }
       })
     })
