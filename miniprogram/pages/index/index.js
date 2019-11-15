@@ -33,7 +33,7 @@ Page({
     })
   },
   
-  gettime: function (day, time) {
+  gettime: function (day) {
     let status
     day.forEach(item => {
       const nowtime = Date.now()
@@ -49,6 +49,13 @@ Page({
         downtime,
         stoptime,
         status
+      }
+    })
+    wx.cloud.callFunction({
+      name: 'setgifts',
+      data:{
+        time: true,
+        day
       }
     })
     this.setData({
