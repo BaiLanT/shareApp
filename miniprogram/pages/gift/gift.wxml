@@ -1,7 +1,9 @@
 <!--miniprogram/pages/gift/gift.wxml-->
-<i-notice-bar icon="systemprompt" loop>
+<view class="title">
+  <i-notice-bar icon="systemprompt" loop>
     1. 根据奖品数量, 1个奖品,就是助力值最高的那个人中奖,5个商品就是助力值高的5个人
 </i-notice-bar>
+</view>
 <view>
   <image class="logo" src="../../images/QJ8798804729.jpg"></image>
 </view>
@@ -24,6 +26,7 @@
 <view class="footer">
   <view>
     <button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:if="{{isuser}}">参与助力</button>
+    <button type="primary" bindtap="start" wx:else>已开奖</button>
   </view>
   <view class="footer-title">
     <text>--------------参与者---------------</text>

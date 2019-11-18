@@ -94,26 +94,59 @@ Page({
       url: `../share/share?uid=${uid}&_id=${list._id}&nickName=${nickname}&avatarUrl=${avatarurl}&stat=${stat}`,
     })
   },
+  start: function() {
+    wx.showToast({
+      title: '已开奖,无法参与活动',
+      icon: 'none',
+      mask: true
+    })
+    setTimeout(() => {
+      wx.hideToast()
+    }, 1500)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     const list = JSON.parse(options.data)
+    const stats = this.aSort(list.list)
+    console.log(stats)
     this.setData({
       list,
       users: list.list
     })
+    if (list.countdown.status == '已开奖') {
+      this.setData({
+        isuser: false
+      })
+    }
   },
 
+  aSort:function (arr) {
+    var len = arr.length;
+    for (var i = 0; i < len - 1; i++) {
+      for (var j = 0; j < len - 1 - i; j++) {
+        // 相邻元素两两对比，元素交换，大的元素交换到前面面
+        if (arr[j].stat < arr[j + 1].stat) {
+          var temp = arr[j];
+          arr[j] = arr[j + 1];
+          arr[j + 1] = temp;
+        }
+      }
+    }
+    return arr
+  },
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
     const that = this
-    const { _id } = that.data.list
+    const {
+      _id
+    } = that.data.list
     wx.cloud.callFunction({
       name: 'gifts',
-      success: function (res) {
+      success: function(res) {
         const gitfs = res.result.data.filter(item => {
           return item._id == _id
         })

@@ -3,6 +3,10 @@
 page {
   background: #eee;
 }
+.title {
+  position: fixed;
+  width: 100%;
+}
 
 .logo {
   width: 100%;

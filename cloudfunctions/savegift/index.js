@@ -9,6 +9,7 @@ exports.main = async(data) => {
   const db = cloud.database()
   const result = await db.collection('gifts').add({
     data: {
+      countdown: data.info.countdown,
       date: data.info.date,
       time: data.info.time,
       name: data.info.name,

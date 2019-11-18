@@ -6,8 +6,7 @@ Page({
    */
   data: {
     list: [],
-    status: ""
-
+    once: true
   },
   card: function (e) {
     const info = JSON.stringify(e.target.dataset.item)
@@ -20,6 +19,10 @@ Page({
    */
   onLoad: function (options) {
     const that = this
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     wx.cloud.callFunction({
       name: 'gifts',
       success: function (res) {
@@ -27,40 +30,8 @@ Page({
           that.setData({
             list: res.result.data
           })
-          that.gettime(res.result.data)
         }
       }
-    })
-  },
-  
-  gettime: function (day) {
-    let status
-    day.forEach(item => {
-      const nowtime = Date.now()
-      const daynum = Date.parse(item.date + ' ' + item.time)
-      let downtime = nowtime + (daynum - nowtime)
-      let stoptime = daynum - nowtime
-      if (daynum - nowtime > 0) {
-        status = '进行中～'
-      } else {
-        status = '已开奖'
-      }
-      item.countdown = {
-        downtime,
-        stoptime,
-        status
-      }
-    })
-    wx.cloud.callFunction({
-      name: 'setgifts',
-      data:{
-        time: true,
-        day
-      }
-    })
-    this.setData({
-      list: day,
-      status
     })
   },
 
@@ -73,7 +44,10 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    wx.hideLoading()
+    this.setData({
+      once: false
+    })
   },
 
   /**
@@ -81,17 +55,18 @@ Page({
    */
   onShow: function () {
     const that = this
-    wx.cloud.callFunction({
-      name: 'gifts',
-      success: function (res) {
-        if (res.errMsg == 'cloud.callFunction:ok') {
-          that.setData({
-            list: res.result.data
-          })
-          that.gettime(res.result.data)
+    if(!this.data.once){
+      wx.cloud.callFunction({
+        name: 'gifts',
+        success: function (res) {
+          if (res.errMsg == 'cloud.callFunction:ok') {
+            that.setData({
+              list: res.result.data
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
 
   /**

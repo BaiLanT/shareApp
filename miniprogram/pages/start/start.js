@@ -1,4 +1,5 @@
 // miniprogram/pages/start/start.js
+let {gettime} = require('../../util/util.js') 
 Page({
 
   /**
@@ -70,7 +71,10 @@ Page({
       return
     }
     const uid = wx.getStorageSync('uid')
+    // 获取助力时间信息
+    const countdown = gettime(date, time)
     let info = {
+      countdown,
       date,
       time,
       name,

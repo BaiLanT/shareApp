@@ -9,7 +9,6 @@ exports.main = async(data) => {
   let item = await db.collection('gifts').where({}).get()
   item = data.day
   item.forEach(async li => {
-    console.log(li)
     await db.collection('gifts').doc(li._id).update({
       data:{
        countdown: li.countdown
