@@ -1,4 +1,7 @@
 // miniprogram/pages/share/share.js
+let {
+  gettime
+} = require('../../util/util.js')
 Page({
 
   /**
@@ -12,17 +15,25 @@ Page({
     stat: 0,
     uid: '',
     _id: '',
-    othername: ''
+    othername: '',
+    isStop: false
   },
-  getuserinfo: function (e) {
-    const { users, uid, stat, _id, nickName, othername} = this.data
+  getuserinfo: function(e) {
+    const {
+      users,
+      uid,
+      stat,
+      _id,
+      nickName,
+      othername
+    } = this.data
     wx.cloud.callFunction({
       name: 'getuid',
       data: {
         event: e
       }
     }).then(result => {
-      if (result.result.openid == uid){
+      if (result.result.openid == uid) {
         wx.showToast({
           title: '不能给自己助力,请点击右上角菜单分享给朋友',
           icon: 'none'
@@ -32,7 +43,7 @@ Page({
         }, 1500)
         return
       }
-     
+
       const otheruser = users.filter(item => {
         return item.uid == result.result.openid
       })
@@ -70,7 +81,7 @@ Page({
           uid,
           _id: _id || ''
         },
-        success: function (res) {
+        success: function(res) {
           wx.showToast({
             title: '助力成功',
             mask: true
@@ -82,88 +93,110 @@ Page({
       })
     })
   },
+  stop: function() {
+    wx.showToast({
+      title: '已结束,无法帮忙助力',
+      icon: 'none',
+      mask: true
+    })
+    setTimeout(() => {
+      wx.hideToast()
+    }, 1500)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     const that = this
     wx.showShareMenu({
       withShareTicket: true
     })
-    const {uid, _id, nickName, avatarUrl, stat} = options
+    const {
+      uid,
+      _id,
+      nickName,
+      avatarUrl,
+      stat
+    } = options
     that.setData({
-      nickName, avatarUrl, stat, uid, _id
+      nickName,
+      avatarUrl,
+      stat,
+      uid,
+      _id
     })
     wx.cloud.callFunction({
       name: 'getusergift',
-      data:{
+      data: {
         uid,
         _id
       },
-      success: function (res) {
-        if (res.result.openid == uid){
+      success: function(res) {
+        if (res.result.openid == uid) {
           that.setData({
             isshare: true
           })
         }
+        const countdown = gettime(res.result.list.date, res.result.list.time)
+        if (countdown.status == '已开奖') {
+          that.setData({
+            isStop: true
+          })
+        }
         that.setData({
-          users: res.result.users.users
+          users: res.result.users.users,
+          list: res.result.list,
+          countdown
         })
       }
     })
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    wx.onAppShow((e) => {
+  onShow: function() {
+    wx.onAppShow(e => {
+     
     })
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-   setTimeout(() => {
-     this.setData({
-       isshare: false
-     })
-   }, 1000)
+  onShareAppMessage: function() {
+    setTimeout(() => {
+      this.setData({
+        isshare: false
+      })
+    }, 1000)
   }
 })

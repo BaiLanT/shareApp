@@ -80,7 +80,6 @@ Page({
     })
   },
   gotoinfo: function(e) {
-    console.log(e)
     const {
       list
     } = this.data
@@ -96,7 +95,7 @@ Page({
   },
   start: function() {
     wx.showToast({
-      title: '已开奖,无法参与活动',
+      title: '已结束,无法参与活动',
       icon: 'none',
       mask: true
     })
@@ -107,22 +106,22 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     const list = JSON.parse(options.data)
     const stats = this.aSort(list.list)
-    console.log(stats)
     this.setData({
       list,
-      users: list.list
+      users: stats
     })
-    if (list.countdown.status == '已开奖') {
+    if (list.countdown.status == '结束') {
       this.setData({
         isuser: false
       })
     }
+    wx.hideShareMenu()
   },
 
-  aSort:function (arr) {
+  aSort: function(arr) {
     var len = arr.length;
     for (var i = 0; i < len - 1; i++) {
       for (var j = 0; j < len - 1 - i; j++) {
@@ -140,6 +139,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    wx.hideShareMenu()
     const that = this
     const {
       _id
@@ -150,9 +150,10 @@ Page({
         const gitfs = res.result.data.filter(item => {
           return item._id == _id
         })
+        const stats = that.aSort(gitfs[0].list)
         that.setData({
           list: gitfs[0],
-          users: gitfs[0].list
+          users: stats
         })
       }
     })

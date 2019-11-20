@@ -2,7 +2,7 @@
 <view class="title">
   <i-notice-bar icon="systemprompt" loop>
     1. 根据奖品数量, 1个奖品,就是助力值最高的那个人中奖,5个商品就是助力值高的5个人
-</i-notice-bar>
+  </i-notice-bar>
 </view>
 <view>
   <image class="logo" src="../../images/QJ8798804729.jpg"></image>
@@ -26,7 +26,7 @@
 <view class="footer">
   <view>
     <button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:if="{{isuser}}">参与助力</button>
-    <button type="primary" bindtap="start" wx:else>已开奖</button>
+    <button type="primary" bindtap="start" wx:else>已结束</button>
   </view>
   <view class="footer-title">
     <text>--------------参与者---------------</text>
@@ -40,4 +40,9 @@
       <text class="stat">助力值: {{item.stat}}</text>
     </view>
   </scroll-view>
+</view>
+<view class="qycode">
+  <text class="qycode-title">最终中奖者,商品发放是由下方微信人员提供,请添加微信号,以免奖品发放错误</text>
+  <image src="../../images/1.jpg" class="image-one" show-menu-by-longpress="true"></image>
+  <image mode="widthFix" src="../../images/2.jpg" class="image-two" show-menu-by-longpress="true"></image>
 </view>

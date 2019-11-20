@@ -6,9 +6,11 @@ Page({
     nickName: '',
     avatarUrl: '',
     openId: '',
-    isAdmin: false
+    isAdmin: false,
+    length: 0
   },
   onLoad: function() {
+    wx.hideShareMenu()
     const that = this
     // 查看是否授权
     wx.getSetting({
@@ -23,11 +25,15 @@ Page({
         }
       }
     })
-    const {openId} = this.data
+    const {
+      openId
+    } = this.data
     wx.cloud.callFunction({
       name: 'getusergift',
       success: function(res) {
-        console.log(res)
+        that.setData({
+          length: res.result.length
+        })
       }
     })
   },
@@ -63,7 +69,7 @@ Page({
       success: function({
         result
       }) {
-        if (result.openId == "otTRX4wIGUFlgRHekahAFKfRprdQ") {
+        if (result.openId == "otTRX4wIGUFlgRHekahAFKfRprdQ" || result.openId == 'otTRX49SpnjsWAifwqjZhRjyxQYg') {
           that.setData({
             isAdmin: true
           })
@@ -80,18 +86,26 @@ Page({
       }
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
+  // 去参与页面
+  gotoUserGifts: function() {
+    wx.navigateTo({
+      url: 'usergifts/usergifts',
+    })
   },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    wx.hideShareMenu()
+    const that = this
+    wx.cloud.callFunction({
+      name: 'getusergift',
+      success: function(res) {
+        that.setData({
+          length: res.result.length
+        })
+      }
+    })
   },
 
   /**
@@ -102,23 +116,9 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
 
   },
 

@@ -10,14 +10,10 @@
     </view>
   </view>
 </view>
-<view class='section-main'>
+<view class='section-main' bindtap="gotoUserGifts">
   <view class="main-middle">
     <view class="user-box">
-      <text class="user-strong">1</text>
-      <text class="user-title">我发起的</text>
-    </view>
-    <view class="user-box">
-      <text class="user-strong">1</text>
+      <text class="user-strong">{{length}}</text>
       <text class="user-title">我参与的</text>
     </view>
   </view>

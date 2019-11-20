@@ -7,9 +7,9 @@ cloud.init()
 exports.main = async (data) => {
   const { OPENID} = cloud.getWXContext()
   const db = cloud.database()
+  let list = []
   if (!data.uid){
     const result = await db.collection('gifts').where({}).get()
-    const list = []
     result.data.forEach(item => {
       item.list.forEach(lists => {
         if (lists.uid == OPENID) {
@@ -25,6 +25,6 @@ exports.main = async (data) => {
     const users = result.data[0].list.filter(item => {
       return item.uid == data.uid
     })
-    return { users: users[0], openid: OPENID}
+    return { users: users[0], openid: OPENID, list: result.data[0]}
   }
 }

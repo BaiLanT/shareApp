@@ -1,5 +1,7 @@
 // miniprogram/pages/start/start.js
-let {gettime} = require('../../util/util.js') 
+let {
+  gettime
+} = require('../../util/util.js')
 Page({
 
   /**
@@ -11,19 +13,19 @@ Page({
     name: '',
     num: 0,
     remarks: ''
-    },
-  bindDateChange: function (e) {
+  },
+  bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  bindTimeChange: function (e) {
+  bindTimeChange: function(e) {
     this.setData({
       time: e.detail.value
     })
   },
   // 日期时间转换
-  formatDate: function (date, showSecond) {
+  formatDate: function(date, showSecond) {
     if (!date) return ''
     var d = new Date()
     if ((date + '').length === 10) d.setTime(date * 1000)
@@ -34,10 +36,10 @@ Page({
     var hour = d.getHours() < 10 ? '0' + d.getHours() : d.getHours()
     var min = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()
     var second = d.getSeconds() < 10 ? '0' + d.getSeconds() : d.getSeconds()
-    if (showSecond) return  hour + ':' + min
+    if (showSecond) return hour + ':' + min
     return year + '-' + month + '-' + day // 按照此种格式显示日期
   },
-  formInputChange (e) {
+  formInputChange(e) {
     this.setData({
       name: e.detail.value
     })
@@ -47,15 +49,21 @@ Page({
       num: e.detail.value
     })
   },
-  formRemarksChange () {
+  formRemarksChange() {
     this.setData({
       remarks: e.detail.value
     })
   },
   // 发起助力
-  start: function () {
-    const { date, time, name, num, remarks} = this.data
-    if (!name && !num){
+  start: function() {
+    const {
+      date,
+      time,
+      name,
+      num,
+      remarks
+    } = this.data
+    if (!name && !num) {
       wx.showToast({
         title: '请正确填写内容',
         icon: 'none'
@@ -63,7 +71,7 @@ Page({
       return
     }
     const now = this.formatDate(Date.now(), true)
-    if (time == now){
+    if (time == now) {
       wx.showToast({
         title: '开奖时间需大于现在时间',
         icon: 'none'
@@ -87,19 +95,19 @@ Page({
       data: {
         info
       },
-      success: function (res) {
-        if (res.errMsg == "cloud.callFunction:ok"){
+      success: function(res) {
+        if (res.errMsg == "cloud.callFunction:ok") {
           wx.showToast({
-            title: '发起成功',
-            icon: 'success',
-            duration: 1000
-          }),
-          setTimeout(() => {
-            wx.hideToast()
-            wx.switchTab({
-              url: '../index/index'
-            })
-          },1000)
+              title: '发起成功',
+              icon: 'success',
+              duration: 1000
+            }),
+            setTimeout(() => {
+              wx.hideToast()
+              wx.switchTab({
+                url: '../index/index'
+              })
+            }, 1000)
         }
       }
     })
@@ -107,7 +115,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    wx.hideShareMenu()
     let time = Date.now()
     this.setData({
       date: this.formatDate(time),
@@ -118,20 +127,20 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
+  onShow: function() {
+    wx.hideShareMenu()
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

@@ -6,14 +6,17 @@
   <text>--------------参与者---------------</text>
 </view>
 <view class="footer-imags">
-    <view class="userinfo">
-      <image src="{{avatarUrl}}" class="avatarUrl"></image>
-      <text class="nickName">{{nickName}}</text>
-    </view>
-    <text class="stat">助力值: {{stat}}</text>
+  <view class="userinfo">
+    <image src="{{avatarUrl}}" class="avatarUrl"></image>
+    <text class="nickName">{{nickName}}</text>
   </view>
-<button type="primary" open-type="share" wx:if='{{isshare}}'>分享助力</button>
-<button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:else>给他助力</button>
+  <text class="stat">助力值: {{stat}}</text>
+</view>
+<view wx:if='{{!isStop}}'>
+  <button type="primary" open-type="share" wx:if='{{isshare}}'>分享助力</button>
+  <button type="primary" open-type="getUserInfo" bindgetuserinfo="getuserinfo" wx:else>给他助力</button>
+</view>
+<button type="primary" bindtap="stop" wx:else>已结束</button>
 <view class="footer-title" wx:if="{{users.length !== 0}}">
   <text>--------------助力者---------------</text>
 </view>

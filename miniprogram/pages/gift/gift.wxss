@@ -3,9 +3,11 @@
 page {
   background: #eee;
 }
+
 .title {
   position: fixed;
   width: 100%;
+  z-index: 9999;
 }
 
 .logo {
@@ -52,9 +54,11 @@ page {
   margin: 20rpx 0;
   text-align: center;
 }
+
 .scroll {
   max-height: 300rpx;
 }
+
 .userinfo {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -62,4 +66,27 @@ page {
   width: 70%;
   display: flex;
   align-items: center;
+}
+
+.qycode {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.qycode-title{
+  margin-left: 10rpx;
+  font-size: 42rpx;
+  font-weight: bold;
+  color:tomato
+}
+.image-one{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  margin-left: auto;
+  margin-right: auto
+}
+.image-two{
+  margin-top: 10rpx;
+  margin-left: auto;
+  margin-right: auto
 }

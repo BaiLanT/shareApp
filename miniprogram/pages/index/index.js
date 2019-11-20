@@ -8,7 +8,7 @@ Page({
     list: [],
     once: true
   },
-  card: function (e) {
+  card: function(e) {
     const info = JSON.stringify(e.target.dataset.item)
     wx.navigateTo({
       url: '../gift/gift?data=' + info,
@@ -17,7 +17,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     const that = this
     wx.showLoading({
       title: '加载中',
@@ -25,8 +25,8 @@ Page({
     })
     wx.cloud.callFunction({
       name: 'gifts',
-      success: function (res) {
-        if (res.errMsg == 'cloud.callFunction:ok'){
+      success: function(res) {
+        if (res.errMsg == 'cloud.callFunction:ok') {
           that.setData({
             list: res.result.data
           })
@@ -35,15 +35,20 @@ Page({
     })
   },
 
-  myLinsterner(e) {
+  sopttime: function(e) {
+    const index = e.target.dataset.index
+    const {
+      list
+    } = this.data
+    list[index].countdown.status = '结束'
     this.setData({
-      status: '结束'
-    });
+      list
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     wx.hideLoading()
     this.setData({
       once: false
@@ -53,12 +58,12 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     const that = this
-    if(!this.data.once){
+    if (!this.data.once) {
       wx.cloud.callFunction({
         name: 'gifts',
-        success: function (res) {
+        success: function(res) {
           if (res.errMsg == 'cloud.callFunction:ok') {
             that.setData({
               list: res.result.data
@@ -72,13 +77,15 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
+  onHide: function() {
+    this.setData({
+      list: []
+    })
   },
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

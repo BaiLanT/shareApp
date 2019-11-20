@@ -1,0 +1,20 @@
+/* miniprogram/pages/index/index.wxss */
+page{
+  background: #eee;
+}
+.card{
+  margin-top: 20rpx;
+}
+.cards{
+  margin-top: 20rpx;
+}
+.view-wrap {
+  display: flex;
+  align-items: center;
+}
+.sb{
+  line-height: 40rpx;
+}
+.ac {
+  line-height: 40rpx;
+}

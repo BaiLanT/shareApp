@@ -60,12 +60,9 @@ page{
   flex-direction: column;
   display: flex;
   align-content: space-between;
-  width: 50%;
+  width: 100%;
   text-align: center;
 
-}
-.user-box:nth-child(1){
-  border-right: 1rpx solid #ccc;
 }
 .user-strong{
   font-size: 50rpx;
